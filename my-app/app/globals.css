@@ -60,6 +60,12 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* Strict App Mode Enforcers */
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  overscroll-behavior: none;
+  touch-action: none; /* Disables double-tap zoom etc generally, be careful but good for strict */
 }
 
 /* Custom Scrollbar for Desktop */

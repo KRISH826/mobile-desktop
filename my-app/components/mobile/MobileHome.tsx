@@ -3,7 +3,7 @@ import { BottomSheet } from "./BottomSheet";
 
 export default function MobileHome() {
     return (
-        <div className="flex flex-col h-screen w-full bg-black text-foreground overflow-hidden selection:bg-primary/20">
+        <div className="flex flex-col h-[100dvh] w-full bg-black text-foreground overflow-hidden selection:bg-primary/20 overscroll-none">
             <header className="px-6 py-4 flex items-center justify-between bg-gradient-to-b from-black/80 to-transparent z-20 absolute top-0 left-0 right-0">
                 <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-bold text-white text-xs">

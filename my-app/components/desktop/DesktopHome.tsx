@@ -18,7 +18,7 @@ const ResultsGrid = dynamic(() => import("./ResultsGrid").then(mod => mod.Result
 
 export default function DesktopHome() {
     return (
-        <div className="flex h-screen w-full bg-background text-foreground overflow-hidden selection:bg-primary/20 selection:text-primary">
+        <div className="flex h-[100dvh] w-full bg-background text-foreground overflow-hidden selection:bg-primary/20 selection:text-primary overscroll-none">
             {/* SearchPanel loads immediately (First UI) */}
             <SearchPanel />
 
