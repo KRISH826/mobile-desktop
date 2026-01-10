@@ -11,11 +11,11 @@ const tabs = [
     { icon: User, label: "Profile" },
 ];
 
-export const BottomSheet = () => {
+export const BottomNav = () => {
     const [activeTab, setActiveTab] = useState(0);
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 bg-card/90 backdrop-blur-xl border-t border-border z-50 safe-area-inset-bottom">
+        <div className="fixed bottom-0 left-0 right-0 bg-card/90 backdrop-blur-xl border-t border-border z-40 safe-area-inset-bottom">
             <div className="flex justify-around items-center h-16 px-4">
                 {tabs.map((tab, index) => (
                     <motion.button

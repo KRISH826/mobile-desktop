@@ -1,11 +1,29 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion } from "motion/react";
 import { Zap, Bell } from "lucide-react";
 import { SwipeCards } from "./SwipeCards";
-import { BottomSheet } from "./BottomSheet";
+import { BottomNav } from "./BottomNav";
+import { MobileDrawer } from "./MobileDrawer";
+
+interface Card {
+    id: number;
+    title: string;
+    distance: string;
+    tags: string[];
+    image: string;
+}
 
 export default function MobileHome() {
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [selectedItem, setSelectedItem] = useState<Card | null>(null);
+
+    const handleOpenDrawer = (item: Card) => {
+        setSelectedItem(item);
+        setDrawerOpen(true);
+    };
+
     return (
         <div className="flex flex-col h-dvh w-full bg-background text-foreground overflow-hidden overscroll-none">
             {/* Header */}
@@ -13,7 +31,7 @@ export default function MobileHome() {
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.1 }}
-                className="px-5 py-4 flex items-center justify-between bg-gradient-to-b from-background to-transparent z-20 absolute top-0 left-0 right-0 safe-area-inset-top"
+                className="px-5 py-4 flex items-center justify-between bg-linear-to-b from-background to-transparent z-20 absolute top-0 left-0 right-0 safe-area-inset-top"
             >
                 <div className="flex items-center gap-2.5">
                     <motion.div
@@ -43,11 +61,18 @@ export default function MobileHome() {
                 transition={{ delay: 0.2, duration: 0.4 }}
                 className="flex-1 flex flex-col relative pt-16"
             >
-                <SwipeCards />
+                <SwipeCards onCardClick={handleOpenDrawer} />
             </motion.main>
 
             {/* Bottom Navigation */}
-            <BottomSheet />
+            <BottomNav />
+
+            {/* Mobile Detail Drawer */}
+            <MobileDrawer
+                open={drawerOpen}
+                onOpenChange={setDrawerOpen}
+                data={selectedItem}
+            />
         </div>
     );
 }

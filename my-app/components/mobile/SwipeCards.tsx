@@ -10,7 +10,7 @@ const cards = [
     { id: 3, title: "City Lights", distance: "0.8km", tags: ["Urban", "Nightlife"], image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&q=80&w=600" },
 ];
 
-export const SwipeCards = () => {
+export const SwipeCards = ({ onCardClick }: { onCardClick: (card: typeof cards[0]) => void }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleSwipe = (direction?: "left" | "right") => {
@@ -31,6 +31,7 @@ export const SwipeCards = () => {
                             card={card}
                             index={2 - index}
                             onSwipe={handleSwipe}
+                            onClick={() => onCardClick(card)}
                             isTop={index === cards.slice(currentIndex, currentIndex + 3).length - 1}
                         />
                     ))}
@@ -73,10 +74,11 @@ interface SwipeCardProps {
     card: typeof cards[0];
     index: number;
     onSwipe: (direction: "left" | "right") => void;
+    onClick: () => void;
     isTop: boolean;
 }
 
-const SwipeCard = ({ card, index, onSwipe, isTop }: SwipeCardProps) => {
+const SwipeCard = ({ card, index, onSwipe, onClick, isTop }: SwipeCardProps) => {
     const x = useMotionValue(0);
     const rotate = useTransform(x, [-200, 200], [-15, 15]);
     const likeOpacity = useTransform(x, [0, 100], [0, 1]);
@@ -101,6 +103,7 @@ const SwipeCard = ({ card, index, onSwipe, isTop }: SwipeCardProps) => {
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.9}
             onDragEnd={handleDragEnd}
+            onClick={() => isTop && onClick()}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1 - index * 0.05, opacity: 1 - index * 0.2 }}
             exit={{ x: 300, opacity: 0, transition: { duration: 0.3 } }}
