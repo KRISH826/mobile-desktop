@@ -17,7 +17,7 @@ interface Card {
 
 export default function MobileHome() {
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState<Card | null>(null);
+    const [selectedItem, setSelectedItem] = useState<Card | undefined>(undefined);
 
     const handleOpenDrawer = (item: Card) => {
         setSelectedItem(item);
