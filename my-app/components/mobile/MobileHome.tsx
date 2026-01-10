@@ -1,25 +1,52 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Zap, Bell } from "lucide-react";
 import { SwipeCards } from "./SwipeCards";
 import { BottomSheet } from "./BottomSheet";
 
 export default function MobileHome() {
     return (
-        <div className="flex flex-col h-[100dvh] w-full bg-black text-foreground overflow-hidden selection:bg-primary/20 overscroll-none">
-            <header className="px-6 py-4 flex items-center justify-between bg-gradient-to-b from-black/80 to-transparent z-20 absolute top-0 left-0 right-0">
-                <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-bold text-white text-xs">
-                        N
-                    </div>
-                    <span className="text-lg font-bold">Nexus</span>
+        <div className="flex flex-col h-dvh w-full bg-background text-foreground overflow-hidden overscroll-none">
+            {/* Header */}
+            <motion.header
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.1 }}
+                className="px-5 py-4 flex items-center justify-between bg-gradient-to-b from-background to-transparent z-20 absolute top-0 left-0 right-0 safe-area-inset-top"
+            >
+                <div className="flex items-center gap-2.5">
+                    <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/30"
+                    >
+                        <Zap className="w-5 h-5 text-white" />
+                    </motion.div>
+                    <span className="text-xl font-bold tracking-tight">Nexus</span>
                 </div>
-                <button className="p-2 rounded-full bg-white/10 backdrop-blur-md">
-                    <svg className="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" /></svg>
-                </button>
-            </header>
 
-            <main className="flex-1 flex flex-col relative">
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative p-2.5 rounded-full bg-secondary/80 backdrop-blur-md"
+                >
+                    <Bell className="w-5 h-5 text-foreground" />
+                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
+                </motion.button>
+            </motion.header>
+
+            {/* Main Content */}
+            <motion.main
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
+                className="flex-1 flex flex-col relative pt-16"
+            >
                 <SwipeCards />
-            </main>
+            </motion.main>
 
+            {/* Bottom Navigation */}
             <BottomSheet />
         </div>
     );

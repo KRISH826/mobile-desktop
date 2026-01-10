@@ -1,24 +1,55 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Home, Compass, Heart, User } from "lucide-react";
+
+const tabs = [
+    { icon: Home, label: "Home" },
+    { icon: Compass, label: "Explore" },
+    { icon: Heart, label: "Saved" },
+    { icon: User, label: "Profile" },
+];
 
 export const BottomSheet = () => {
+    const [activeTab, setActiveTab] = useState(0);
+
     return (
-        <>
-            {/* Navigation Bar */}
-            <div className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-xl border-t border-white/10 pb-safe pt-2 px-6 z-50">
-                <div className="flex justify-between items-center h-16">
-                    <div className="flex flex-col items-center gap-1 text-primary cursor-pointer">
-                        <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
-                        <span className="text-[10px] font-medium">Home</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                        <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-                        <span className="text-[10px] font-medium">Explore</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                        <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                        <span className="text-[10px] font-medium">Profile</span>
-                    </div>
-                </div>
+        <div className="fixed bottom-0 left-0 right-0 bg-card/90 backdrop-blur-xl border-t border-border z-50 safe-area-inset-bottom">
+            <div className="flex justify-around items-center h-16 px-4">
+                {tabs.map((tab, index) => (
+                    <motion.button
+                        key={tab.label}
+                        onClick={() => setActiveTab(index)}
+                        whileTap={{ scale: 0.9 }}
+                        className="relative flex flex-col items-center gap-1 py-2 px-4"
+                    >
+                        {activeTab === index && (
+                            <motion.div
+                                layoutId="tabIndicator"
+                                className="absolute -top-0.5 w-10 h-1 bg-primary rounded-full"
+                                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                            />
+                        )}
+                        <motion.div
+                            animate={{
+                                scale: activeTab === index ? 1.1 : 1,
+                                y: activeTab === index ? -2 : 0
+                            }}
+                            transition={{ type: "spring", stiffness: 400 }}
+                        >
+                            <tab.icon
+                                className={`w-6 h-6 transition-colors ${activeTab === index ? "text-primary" : "text-muted-foreground"
+                                    }`}
+                            />
+                        </motion.div>
+                        <span className={`text-[10px] font-medium transition-colors ${activeTab === index ? "text-primary" : "text-muted-foreground"
+                            }`}>
+                            {tab.label}
+                        </span>
+                    </motion.button>
+                ))}
             </div>
-        </>
+        </div>
     );
 };
