@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react"
 import { Search, Zap, TrendingUp, Clock, Sparkles, Crown } from "lucide-react";
 
 const menuItems = [
@@ -58,8 +58,8 @@ export const SearchPanel = () => {
                             whileHover={{ x: 4, backgroundColor: "var(--sidebar-accent)" }}
                             whileTap={{ scale: 0.98 }}
                             className={`w-full flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all ${item.active
-                                    ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-lg"
-                                    : "text-sidebar-foreground hover:bg-sidebar-accent"
+                                ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-lg"
+                                : "text-sidebar-foreground hover:bg-sidebar-accent"
                                 }`}
                         >
                             <item.icon className="w-5 h-5" />

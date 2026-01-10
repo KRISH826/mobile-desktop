@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react"
 import { Bell, ArrowUpRight, TrendingUp, Users, DollarSign, Activity } from "lucide-react";
 
 const stats = [
@@ -29,7 +29,7 @@ const containerVariants = {
 
 const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+    show: { opacity: 1, y: 0, }
 };
 
 export const ResultsGrid = () => {
@@ -144,7 +144,7 @@ export const ResultsGrid = () => {
                                 <span>{project.date}</span>
                                 <div className="flex items-center gap-1.5">
                                     <div className={`w-2 h-2 rounded-full ${project.status === "Active" ? "bg-green-500" :
-                                            project.status === "Review" ? "bg-yellow-500" : "bg-gray-400"
+                                        project.status === "Review" ? "bg-yellow-500" : "bg-gray-400"
                                         } animate-pulse`} />
                                     <span>{project.status}</span>
                                 </div>

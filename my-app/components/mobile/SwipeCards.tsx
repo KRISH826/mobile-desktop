@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useMotionValue, useTransform, AnimatePresence } from "motion/react"
 import { MapPin, X, Heart, Star } from "lucide-react";
 
 const cards = [
@@ -13,7 +13,7 @@ const cards = [
 export const SwipeCards = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const handleSwipe = () => {
+    const handleSwipe = (direction?: "left" | "right") => {
         setCurrentIndex((prev) => Math.min(prev + 1, cards.length - 1));
     };
 
